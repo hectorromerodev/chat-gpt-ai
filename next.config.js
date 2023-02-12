@@ -2,17 +2,15 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-        'links.papareact.com'
-    ]
+    domains: ["links.papareact.com"],
   },
   experimental: {
     appDir: true,
   },
-  extends: [
-    'plugin:@next/next/recommended',
-    "prettier"
-  ],
-}
+  extends: ["plugin:@next/next/recommended", "prettier"],
+  rules: {
+    "prettier/prettier": "error",
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
