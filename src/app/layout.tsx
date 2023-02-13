@@ -1,4 +1,5 @@
 import "./globals.css";
+import ClientProvider from "@/app/components/ClientProvider";
 import Login from "@/app/components/Login";
 import SessionProvider from "@/app/components/SessionProvider";
 import SideBar from "@/app/components/SideBar";
@@ -25,7 +26,7 @@ export default async function RootLayout({
                 <SideBar />
               </div>
 
-              {/*Client provider - notification*/}
+              <ClientProvider />
 
               <div className="bg-[#343541] flex-1">{children}</div>
             </div>
