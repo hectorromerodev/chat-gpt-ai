@@ -1,10 +1,12 @@
 "use client";
 
+import ModelSelection from "@/app/components/ModelSelection";
 import { addDoc, serverTimestamp, collection } from "@firebase/firestore";
 import { PaperAirplaneIcon } from "@heroicons/react/20/solid";
 import { useSession } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import toast from "react-hot-toast";
+import useSWR from "swr";
 import { db } from "../../../firebase";
 
 type Props = {
@@ -12,10 +14,11 @@ type Props = {
 };
 
 function ChatInput({ chatId }: Props) {
-  const { data: session } = useSession();
   const [prompt, setPrompt] = useState("");
-
-  const model = "davinci";
+  const { data: session } = useSession();
+  const { data: model } = useSWR("model", {
+    fallbackData: "text-davinci-003",
+  });
 
   const sendMessage = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -91,7 +94,9 @@ function ChatInput({ chatId }: Props) {
         </button>
       </form>
 
-      <div>{/*  ModelSelection */}</div>
+      <div className="md:hidden">
+        <ModelSelection />
+      </div>
     </div>
   );
 }
